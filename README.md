@@ -22,7 +22,7 @@ npm run lint
 
 ### Bootstrap
 ```
-npm install bootstrap-vue bootstrap
+npm install bootstrap@5.2.3
 ```
 
 ### Customize configuration
