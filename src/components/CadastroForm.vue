@@ -176,19 +176,28 @@
             <div class="button-group">
                 <button type="button" class="btn btn-dark" @click="goToHome">Voltar</button>
                 <button type="button" class="btn btn-danger" @click="resetForm">Limpar</button>
-                <button type="button" class="btn btn-success">Confirmar</button>
+                <button type="button" class="btn btn-success" @click="handleSubmit">Confirmar</button>
             </div>
         </form>
         <br>
     </div>
+    <NotificacaoPreencherCampos v-if="formData.showNotificationError" id="notificacao"></NotificacaoPreencherCampos>
+    <NotificacaoSucesso v-if="formData.showNotificationSueccess" id="notificacao"></NotificacaoSucesso>
 </template>
 
 <script>
-export default { //inicia o form de cadastro em branco
+import NotificacaoPreencherCampos from './NotificacaoPreencherCampos.vue';
+import NotificacaoSucesso from './NotificacaoSucesso.vue';
+
+export default { 
+    components: {
+    NotificacaoPreencherCampos,
+    NotificacaoSucesso
+  },
     data() {
         return {
-            formData: {
-                nome: '',
+            formData: { //inicia o form de cadastro em branco
+                nome: '', 
                 cpf: '',
                 email: '',
                 dataNasc: '',
@@ -204,14 +213,33 @@ export default { //inicia o form de cadastro em branco
                 login: '',
                 senha: '',
                 interesses: [],
-                autorizo: false
+                autorizo: false,
+                showNotificationError: false,
+                showNotificationSueccess: false
             }
         };
     },
     methods: {
         handleSubmit() {
-            // Aqui você pode processar o formulário (por exemplo, enviar para um servidor)
-            console.log("Dados enviados:", this.formData);
+            if (this.formData.nome === '' || this.formData.cpf === '' || this.formData.email === '' || this.formData.dataNasc === '' || this.formData.sexo === '' || this.formData.interesses.length === 0) {
+                this.formData.showNotificationError = true;
+                    setTimeout(() => {
+                        this.formData.showNotificationError = false;
+                    }, 4000);
+            } else {
+               // Verifica se já existem dados no localStorage
+            const existingData = JSON.parse(localStorage.getItem('usuarios')) || [];
+            // Adiciona o novo usuário
+            existingData.push(this.formData);
+            // Atualiza o localStorage com os novos dados
+            localStorage.setItem('usuarios', JSON.stringify(existingData));
+             // Redireciona para a página de consulta
+            this.$router.push('/'); // Redireciona para Home
+            this.formData.showNotificationSueccess = true;
+                    setTimeout(() => {
+                        this.formData.showNotificationSueccess = false;
+                    }, 4000);
+            }
         },
         goToHome() {
             this.$router.push('/'); // Redireciona para Home
