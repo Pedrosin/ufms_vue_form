@@ -11,20 +11,44 @@
       <button @click="goToConsulta" type="button" class="btn btn-primary">Consultar Dados Cadastrados</button>
     </div>
   </div>
+  <NotificacaoSucesso v-if="formData.showNotificationSuccess" id="notificacao"></NotificacaoSucesso>
 </template>
 
 <script>
+import NotificacaoSucesso from './NotificacaoSucesso.vue';
+
 export default {
   name: 'HelloWorld',
-  props: {
-    msg: String
+
+  components: {
+    NotificacaoSucesso
   },
+
+  data() {
+    return {
+      formData: {
+        showNotificationSuccess: false
+      }
+    }
+  },
+
+  created() {
+    console.log('Query Success:', this.$route.query.success); 
+    if (this.$route.query.success === "true") {
+      this.formData.showNotificationSuccess = true;
+      setTimeout(() => {
+        this.formData.showNotificationSuccess = false;
+      }, 4000);
+    }
+  },
+
   methods: {
     goToCadastro() {
       this.$router.push('/cadastro'); // Redireciona para a rota de cadastro
     },
+
     goToConsulta() {
-      this.$router.push('/consulta'); // Redireciona para a rota de consulta (ainda não implementada)
+      this.$router.push('/consulta'); // Redireciona para a rota de consulta 
     }
   }
 }

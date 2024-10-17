@@ -181,8 +181,8 @@
         </form>
         <br>
     </div>
-    <NotificacaoPreencherCampos v-if="formData.showNotificationError" id="notificacao"></NotificacaoPreencherCampos>
-    <NotificacaoSucesso v-if="formData.showNotificationSueccess" id="notificacao"></NotificacaoSucesso>
+        <NotificacaoPreencherCampos v-if="formData.showNotificationError" id="notificacao"></NotificacaoPreencherCampos>
+        <NotificacaoSucesso v-if="formData.showNotificationSuccess" id="notificacao"></NotificacaoSucesso>
 </template>
 
 <script>
@@ -215,13 +215,13 @@ export default {
                 interesses: [],
                 autorizo: false,
                 showNotificationError: false,
-                showNotificationSueccess: false
+                showNotificationSuccess: false
             }
         };
     },
     methods: {
         handleSubmit() {
-            if (this.formData.nome === '' || this.formData.cpf === '' || this.formData.email === '' || this.formData.dataNasc === '' || this.formData.sexo === '' || this.formData.interesses.length === 0) {
+            if (this.formData.nome === '' /*|| this.formData.cpf === '' || this.formData.email === '' || this.formData.dataNasc === '' || this.formData.sexo === '' || this.formData.interesses.length === 0*/) {
                 this.formData.showNotificationError = true;
                     setTimeout(() => {
                         this.formData.showNotificationError = false;
@@ -233,12 +233,7 @@ export default {
             existingData.push(this.formData);
             // Atualiza o localStorage com os novos dados
             localStorage.setItem('usuarios', JSON.stringify(existingData));
-             // Redireciona para a página de consulta
-            this.$router.push('/'); // Redireciona para Home
-            this.formData.showNotificationSueccess = true;
-                    setTimeout(() => {
-                        this.formData.showNotificationSueccess = false;
-                    }, 4000);
+            this.$router.push({ path: '/', query: { success: true } });
             }
         },
         goToHome() {
@@ -389,4 +384,6 @@ button {
     height: calc(3rem + 1px);
     line-height: 1.25;
 }
+
+
 </style>

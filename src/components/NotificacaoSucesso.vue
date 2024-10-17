@@ -8,7 +8,7 @@
 <div class="alert alert-success alert-dismissible fade show" role="alert" id="alert">
   <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
     Cadastro realizado com sucesso! <br><a href="" @click="consultaDados" class="alert-link">Clique para Visualizar</a>
-    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    <button type="button" @click="fecharAlerta" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 </div>
 </template>
 
@@ -18,6 +18,10 @@ export default {
     methods: {
         consultaDados() {
             this.$router.push('/consulta'); // Redireciona para a rota de consulta (ainda não implementada)
+        },
+        fecharAlerta() {
+            const notificacao = document.getElementById('alert');
+            notificacao.style.display = 'none';
         }
     }
 }
