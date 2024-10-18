@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="container">
     <h1>Consulta de Dados</h1>
     <div class="button-group">
-      <button type="button" class="btn btn-dark" @click="goToHome">Voltar</button>
+      <button type="button" class="btn btn-secondary" @click="goToHome">Voltar</button>
       <button type="button" class="btn btn-danger" @click="resetForm">Apagar Todos os Registros</button>
       <button type="button" class="btn btn-success" @click="goToCadastro">Novo Cadastro</button>
     </div>
@@ -93,7 +93,7 @@ export default {
 <style>
 h1 {
   text-align: center;
-  padding: 10px;
+  padding: 50px;
 }
 
 .sem-dados {

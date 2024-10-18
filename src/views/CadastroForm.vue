@@ -1,23 +1,23 @@
 <template>
-    <div>
-        <form @submit.prevent="handleSubmit">
+    <div class="container">
+        <form @submit.prevent="handleSubmit"    >
             <!-- Dados Pessoais -->
-            <fieldset>
+            <fieldset class="fildset">
                 <legend>Dados Pessoais</legend>
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="nome" placeholder="Nome Completo"
                         v-model="formData.nome" required>
-                    <label for="floatingInput">Nome Completo</label>
+                    <label class="floating-label" for="floatingInput">Nome Completo</label>
                 </div>
 
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="cpf" placeholder="CPF" v-model="formData.cpf" required>
-                    <label for="floatingInput">CPF</label>
+                    <label class="floating-label" for="floatingInput">CPF</label>
                 </div>
 
                 <div class="form-floating mb-3">
                     <input type="email" class="form-control" id="email" placeholder="Email" v-model="formData.email" required>
-                    <label for="floatingInput">Email</label>
+                    <label class="floating-label" for="floatingInput">Email</label>
                 </div>
 
                 <label for="data-nasc" class="label">Data de Nascimento *</label>
@@ -43,24 +43,24 @@
             </fieldset>
 
             <!-- Dados de Contato -->
-            <fieldset>
+            <fieldset class="fildset">
                 <legend>Dados de Contato</legend>
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="endereco" placeholder="Endereço"
                         v-model="formData.endereco" required>
-                    <label for="floatingInput">Endereço</label>
+                    <label class="floating-label" for="floatingInput">Endereço</label>
                 </div>
 
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="bairro" placeholder="Bairro" v-model="formData.bairro"
                         required>
-                    <label for="floatingInput">Bairro</label>
+                    <label class="floating-label" for="floatingInput">Bairro</label>
                 </div>
 
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="cidade" placeholder="Cidade" v-model="formData.cidade"
                         required>
-                    <label for="floatingInput">Cidade</label>
+                    <label class="floating-label" for="floatingInput">Cidade</label>
                 </div>
 
 
@@ -99,34 +99,34 @@
 
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="cep" placeholder="CEP" v-model="formData.cep" required>
-                    <label for="floatingInput">CEP</label>
+                    <label class="floating-label" for="floatingInput">CEP</label>
                 </div>
 
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="celular" placeholder="Celular"
                         v-model="formData.celular" required>
-                    <label for="floatingInput">Celular</label>
+                    <label class="floating-label" for="floatingInput">Celular</label>
                 </div>
 
                 <div class="form-floating mb-3">
                     <input type="number" class="form-control" id="telefone" placeholder="Telefone"
                         v-model="formData.telefone" required>
-                    <label for="floatingInput">Telefone</label>
+                    <label class="floating-label" for="floatingInput">Telefone</label>
                 </div>
             </fieldset>
 
             <!-- Dados de Cadastro -->
-            <fieldset>
+            <fieldset class="fildset">
                 <legend>Dados de Cadastro</legend>
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="Login" placeholder="Login" v-model="formData.login"
                         required>
-                    <label for="floatingInput">Login</label>
+                    <label class="floating-label" for="floatingInput">Login</label>
                 </div>
                 <div class="form-floating mb-3">
                     <input type="password" class="form-control" id="floatingPassword" placeholder="Password"
                         v-model="formData.senha" required>
-                    <label for="floatingPassword">Password</label>
+                    <label class="floating-label" for="floatingPassword">Password</label>
                 </div>
                 <label class="label">Deseja receber informações sobre os seguintes assuntos:</label>
                 <div class="checkbox-group">
@@ -194,7 +194,7 @@
             </fieldset>
             <!-- Botões -->
             <div class="button-group">
-                <button type="button" class="btn btn-dark" @click="goToHome">Voltar</button>
+                <button type="button" class="btn btn-secondary" @click="goToHome">Voltar</button>
                 <button type="button" class="btn btn-danger" @click="resetForm">Limpar</button>
                 <button type="button" class="btn btn-success" @click="handleSubmit()">{{ modoEdicao ? 'Salvar' : 'Confirmar' }}</button>
             </div>
@@ -291,10 +291,10 @@ export default {
         },
 
         atualizarUsuario() {
-            const usuarioEdicao = this.$route.query.usuarioEdicao;
-            const index = JSON.parse(usuarioEdicao);
+            const usuarioEdicao = this.$route.query.usuarioEdicao; //pega o parametro da url
+            const index = JSON.parse(usuarioEdicao); //pega o index do usuarioo com base no parametro
             this.usuarioEdicao = index;
-            const usuarios = JSON.parse(localStorage.getItem('usuarios')) || [];
+            const usuarios = JSON.parse(localStorage.getItem('usuarios')) || []; //captura os dados do user no localStorage pela lista de usuários
 
             // Verificando se o índice é válido e se existe um usuário no índice especificado
             if (this.usuarioEdicao !== null ) {
@@ -351,9 +351,9 @@ form {
     width: fit-content;
     margin: 0 auto;
     padding: 20px;
-    background-color: white;
     border: 1px solid #ccc;
     border-radius: 10px;
+    margin-top: 50px;
 }
 
 fieldset {
