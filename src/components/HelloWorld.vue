@@ -4,6 +4,7 @@
     <p class="lead">
       Desenvolvido por Victor Pedroso Duma, como trabalho acadêmico da Faculdade Federal do Mato Grosso do Sul, Curso de Tecnologia da Informação, 2024.
       Este projeto foi criado com o objetivo de desenvolver uma aplicação web usando frameworks como Vue, Bootstrap e funções de javascript como localstorage.
+      Nenhuma Informação preenchida nesse site será armazenada em servidor, e nem usada por terceiros.
     </p>
 
     <div class="button-group">
@@ -15,7 +16,7 @@
 </template>
 
 <script>
-import NotificacaoSucesso from './NotificacaoSucesso.vue';
+import NotificacaoSucesso from './Notificacoes/NotificacaoSucesso.vue';
 
 export default {
   name: 'HelloWorld',
@@ -33,13 +34,20 @@ export default {
   },
 
   created() {
-    console.log('Query Success:', this.$route.query.success); 
-    if (this.$route.query.success === "true") {
+    
+    if (localStorage.getItem('showNotificationSuccess') === 'true') {
+        this.formData.showNotificationSuccess = true;
+        setTimeout(() => {
+          this.formData.showNotificationSuccess = false;
+            localStorage.removeItem('showNotificationSuccess'); // Limpa o item após o uso
+        }, 4000);
+    }
+    /*if (this.$route.query.success === "true") {
       this.formData.showNotificationSuccess = true;
       setTimeout(() => {
         this.formData.showNotificationSuccess = false;
       }, 4000);
-    }
+    }*/
   },
 
   methods: {
@@ -59,10 +67,8 @@ export default {
   margin-top: 30px;
   font-family: Arial, Helvetica, sans-serif;
   font-size: 19px;}
-.button-group {
-  margin-top: 50px; 
-}
+
 .btn {
-  margin: auto 10px;
+  margin: 10px;
 }
 </style>

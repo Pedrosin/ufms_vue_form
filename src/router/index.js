@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
 import HelloWorld from '@/components/HelloWorld.vue';
 import PaginaCadastro from '@/views/PaginaCadastro.vue';
-import ConsultaDados from '@/components/ConsultaDados.vue';
+import ConsultaDados from '@/views/ConsultaDados.vue';
 
 const routes = [
     {

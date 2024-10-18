@@ -5,7 +5,7 @@
   </template>
   
   <script>
-  import CadastroForm from '@/components/CadastroForm.vue';
+  import CadastroForm from '@/views/CadastroForm.vue';
   
   export default {
     components: {
