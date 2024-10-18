@@ -1,6 +1,6 @@
 <template>
    <main :class="{'modo-escuro': modoEscuroAtivo}">
-    <Header @trocar-tema="trocarTema" :modoEscuroAtivo="modoEscuroAtivo"></Header> <!-- Passa o evento para o Header -->
+    <Header @trocar-tema="trocarTema" :modoEscuroAtivo="modoEscuroAtivo"></Header> <!-- Passa o evento para o Header. -->
     <div id="app" class="conteudo">
       <div class ="container">
       <img alt="Vue logo" src="./assets/UFMS.png">
