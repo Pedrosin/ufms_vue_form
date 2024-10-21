@@ -11,7 +11,7 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="cpf" placeholder="CPF" v-model="formData.cpf" required>
+                    <input type="text" class="form-control" id="cpf" placeholder="CPF" v-model="formData.cpf" required v-mask="['###.###.###-##']">
                     <label class="floating-label" for="floatingInput">CPF</label>
                 </div>
 
@@ -45,6 +45,13 @@
             <!-- Dados de Contato -->
             <fieldset class="fildset">
                 <legend>Dados de Contato</legend>
+
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="cep" placeholder="CEP" v-model="formData.cep" 
+                    required v-mask="['#####-###']" @change="handleCEP">
+                    <label class="floating-label" for="floatingInput">CEP</label>
+                </div>
+
                 <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="endereco" placeholder="Endereço"
                         v-model="formData.endereco" required>
@@ -98,19 +105,14 @@
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="text" class="form-control" id="cep" placeholder="CEP" v-model="formData.cep" required>
-                    <label class="floating-label" for="floatingInput">CEP</label>
-                </div>
-
-                <div class="form-floating mb-3">
                     <input type="text" class="form-control" id="celular" placeholder="Celular"
-                        v-model="formData.celular" required>
+                        v-model="formData.celular" required v-mask="['(##) ####-####', '(##) #####-####']">
                     <label class="floating-label" for="floatingInput">Celular</label>
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="number" class="form-control" id="telefone" placeholder="Telefone"
-                        v-model="formData.telefone" required>
+                    <input type="text" class="form-control" id="telefone" placeholder="Telefone"
+                        v-model="formData.telefone" required v-mask="['(##) ####-####']">
                     <label class="floating-label" for="floatingInput">Telefone</label>
                 </div>
             </fieldset>
@@ -208,6 +210,7 @@
 <script>
 import NotificacaoPreencherCampos from '@/components/Notificacoes/NotificacaoPreencherCampos.vue';
 import NotificacaoSucesso from '@/components/Notificacoes/NotificacaoSucesso.vue';
+import {mask} from 'vue-the-mask';
 //import { defineSSRCustomElement } from 'vue';
 
 //VERIFICAR VALIDAÇÃO E MASCARA DE DADOS
@@ -227,6 +230,7 @@ export default {
         NotificacaoPreencherCampos,
         NotificacaoSucesso
     },
+    directives: {mask},
     created() {
         const index = Number(this.$route.query.usuarioEdicao);
         if (isNaN(index) === false && index !== null && index !== undefined) {
@@ -336,6 +340,18 @@ export default {
         this.formData.senha = usuario.senha;
         this.formData.interesses = usuario.interesses;
         this.formData.autorizo = usuario.autorizo;
+        },
+      async  handleCEP(){
+            try {
+                const response = await fetch(`https://viacep.com.br/ws/${this.formData.cep}/json/`);
+                const data = await response.json();
+                this.formData.endereco = data.logradouro;
+                this.formData.bairro = data.bairro;
+                this.formData.cidade = data.localidade;
+                this.formData.uf = data.uf;
+            }catch (error) {
+                console.log(error);
+            }
         }
     }
 };

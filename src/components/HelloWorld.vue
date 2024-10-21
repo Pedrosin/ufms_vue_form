@@ -3,7 +3,7 @@
     <h1 class="mt-5">Este é um projeto desenvolvido para a UFMS</h1>
     <p class="lead">
       Desenvolvido por Victor Pedroso Duma, como trabalho acadêmico da Faculdade Federal do Mato Grosso do Sul, Curso de Tecnologia da Informação, 2024.
-      Este projeto foi criado com o objetivo de desenvolver uma aplicação web usando frameworks como Vue.js, Bootstrap, e funções de javascript como localstorage, 
+      Este projeto foi criado com o objetivo de desenvolver uma aplicação web usando frameworks como Vue.js, Bootstrap, e funções de javascript como localstorage, Consumo de API's
       e um CRUD (Create, Read, Update, Delete) para armazenar e editar os dados temporarios. Nenhuma Informação preenchida nesse site será armazenada em servidor, e nem usada por terceiros.
     </p>
 
